@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewreport" content="width=device-width, initial-scale=1">
+        <title>Age Calculator</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="age-cal-app">
+                <h2>Age Calculator<img src="images/clock2.png"></h2>
+                <form id="ageCalculatorForm">                    
+                    <div class="row" >
+                        <input type="text" id="dob" placeholder="Enter your DOB (DD/MM/YYYY)">
+                        <input type="submit" value="Calculate Age">
+                    </div>
+                    Your are   <input type="number" id="age" placeholder="_____" readonly>years old
+                  </form>
+            </div>
+        </div>
+        <script>
+            document.getElementById("ageCalculatorForm").addEventListener("submit", function(event) {
+              event.preventDefault();
+              
+              var dobInput = document.getElementById("dob").value;
+              var dobArray = dobInput.split("/");
+              var dobDate = new Date(dobArray[2], dobArray[1] - 1, dobArray[0]);
+              var today = new Date();
+              var age = today.getFullYear() - dobDate.getFullYear();
+              var monthDiff = today.getMonth() - dobDate.getMonth();
+              
+              if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dobDate.getDate())) {
+                age--;
+              }
+              
+              document.getElementById("age").value = age;
+            });
+          </script>
+        
+        
+    </body>
+</html>
